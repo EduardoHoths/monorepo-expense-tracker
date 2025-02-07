@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { login as authLogin } from "@expense/auth";
+import { jwtDecode } from "jwt-decode";
 
 type User = {
   userId: string;
@@ -45,11 +46,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   async function login(email: string, password: string) {
     try {
       const accessToken = await authLogin(email, password);
+      const { userId } = jwtDecode(accessToken) as Partial<User>;
 
       const userData: User = {
         accessToken: accessToken as string,
         email,
-        userId: 'userId as string,'
+        userId: userId as string,
       };
 
       await AsyncStorage.setItem("user", JSON.stringify(userData));
@@ -63,8 +65,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await AsyncStorage.removeItem("user");
     setUser(null);
   }
-
-  console.log(user);
 
   return (
     <AuthContext.Provider value={{ user, login, logout, loading }}>

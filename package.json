@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "dev:server": "cd apps/server && npm run dev",
-    "dev:mobile": "cd apps/mobile && npm run start"
+    "dev:mobile": "cd apps/mobile && npm run start",
+    "prisma:generate": "cd apps/server && npx prisma generate"
   },
   "keywords": [],
   "author": "",
