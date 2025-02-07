@@ -7,6 +7,7 @@ import { HomeScreen } from "../screens/home-screen";
 import { SettingsScreen } from "../screens/settings-screen";
 import { ActivityIndicator, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { RegisterScreen } from "../screens/register-screen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -58,6 +59,11 @@ export function AppNavigator() {
           <Stack.Screen
             name="Login"
             component={LoginScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

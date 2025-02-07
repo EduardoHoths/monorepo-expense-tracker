@@ -1,5 +1,5 @@
 import { UuidService } from "../../../shared/services/uuid-service";
-import { ExpenseCategory } from "./expense-category";
+import { ExpenseCategory } from "@expense/types";
 
 interface ExpenseProps {
   id: string;

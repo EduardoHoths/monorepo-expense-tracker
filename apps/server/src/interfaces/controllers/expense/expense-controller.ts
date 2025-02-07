@@ -1,15 +1,12 @@
 import { CreateExpenseUseCase } from "../../../application/use-cases/expense/create-expense/create-expense";
 import { ExpensePresenter } from "../../presenters/expense-presenter";
-import { ExpenseCategory } from "../../../domain/entities/expense/expense-category";
+import { ExpenseCategory, Filter } from "@expense/types";
 import { HttpRequest } from "../../../shared/http/http-request";
 import { HttpResponse } from "../../../shared/http/http-response";
 import { Validator } from "../../../shared/validation/validator";
 import HttpStatusCode from "../../../infra/http/types/http-status-code";
 import { ControllerErrorHandler } from "../../errors/controller-error-handler";
-import {
-  Filter,
-  ListExpensesUseCase,
-} from "../../../application/use-cases/expense/list-expense/list-expense";
+import { ListExpensesUseCase } from "../../../application/use-cases/expense/list-expense/list-expense";
 import { UpdateExpenseUseCase } from "../../../application/use-cases/expense/update-expense/update-expense";
 import { DeleteExpenseUseCase } from "../../../application/use-cases/expense/delete-expense/delete-expense";
 

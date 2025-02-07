@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { UserRepository } from "../../../../domain/interfaces/user-repository";
 import { ExpenseRepository } from "../../../../domain/interfaces/expense-repository";
 import { User } from "../../../../domain/entities/user/user";
-import { ExpenseCategory } from "../../../../domain/entities/expense/expense-category";
+import { ExpenseCategory } from "@expense/types"
 import { Expense } from "../../../../domain/entities/expense/expense";
 import { UpdateExpenseUseCase } from "./update-expense";
 

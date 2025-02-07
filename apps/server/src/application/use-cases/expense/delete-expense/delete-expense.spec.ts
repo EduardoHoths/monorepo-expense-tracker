@@ -3,7 +3,7 @@ import { UserRepository } from "../../../../domain/interfaces/user-repository";
 import { ExpenseRepository } from "../../../../domain/interfaces/expense-repository";
 import { User } from "../../../../domain/entities/user/user";
 import { DeleteExpenseUseCase } from "./delete-expense";
-import { ExpenseCategory } from "../../../../domain/entities/expense/expense-category";
+import { ExpenseCategory } from "@expense/types";
 import { Expense } from "../../../../domain/entities/expense/expense";
 
 describe("DeleteExpenseUseCase", () => {

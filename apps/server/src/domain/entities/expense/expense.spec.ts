@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { Expense } from "./expense";
-import { ExpenseCategory } from "./expense-category";
+import { ExpenseCategory } from "@expense/types";
 
 vi.mock("uuid", () => ({
   v4: () => "mocked-uuid",

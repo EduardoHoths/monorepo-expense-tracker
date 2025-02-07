@@ -1,5 +1,5 @@
 import { DateUtils } from "../../../../../utils/date-utils";
-import { ExpenseCategory } from "../../../../../domain/entities/expense/expense-category";
+import { ExpenseCategory } from "@expense/types";
 import { afterAll, describe, expect, it } from "vitest";
 import Server from "../../server";
 import request from "supertest";
@@ -351,7 +351,7 @@ describe("Expense Routes", async () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual({
-        message: "Expense deleted successfully"
+        message: "Expense deleted successfully",
       });
     });
 
@@ -363,19 +363,18 @@ describe("Expense Routes", async () => {
       expect(response.status).toBe(404);
       expect(response.body).toEqual(
         expect.objectContaining({
-          message: "Expense not found"
+          message: "Expense not found",
         })
       );
     });
 
     it("should not delete a expense without token provided", async () => {
-      const response = await request(app)
-        .delete("/expenses/delete/1");
+      const response = await request(app).delete("/expenses/delete/1");
 
       expect(response.status).toBe(401);
       expect(response.body).toEqual(
         expect.objectContaining({
-          message: "Token not provided"
+          message: "Token not provided",
         })
       );
     });

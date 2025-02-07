@@ -1,6 +1,6 @@
 import { AppBaseError } from "../../../application/errors/app-error-base";
 import { Expense } from "../../../domain/entities/expense/expense";
-import { ExpenseCategory } from "../../../domain/entities/expense/expense-category";
+import { ExpenseCategory } from "@expense/types"
 import { ExpenseRepository } from "../../../domain/interfaces/expense-repository";
 import { DateUtils } from "../../../utils/date-utils";
 

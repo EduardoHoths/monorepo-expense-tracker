@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { ExpenseRepository } from "../../../../domain/interfaces/expense-repository";
 import { Expense } from "../../../../domain/entities/expense/expense";
-import { Filter, ListExpensesUseCase } from "./list-expense";
-import { ExpenseCategory } from "../../../../domain/entities/expense/expense-category";
+import { ListExpensesUseCase } from "./list-expense";
 import { DateUtils } from "../../../../utils/date-utils";
+import { Filter, ExpenseCategory } from "@expense/types";
 
 describe("ListExpensesUseCase", () => {
   const TEST_EXPENSES: Expense[] = [

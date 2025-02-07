@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { ExpenseRepository } from "../../../domain/interfaces/expense-repository";
 import { Expense } from "../../../domain/entities/expense/expense";
-import { ExpenseCategory } from "../../../domain/entities/expense/expense-category";
+import { ExpenseCategory } from "@expense/types"
 
 export class ExpenseRepositoryPrisma implements ExpenseRepository {
   constructor(private readonly prismaClient: PrismaClient) {}

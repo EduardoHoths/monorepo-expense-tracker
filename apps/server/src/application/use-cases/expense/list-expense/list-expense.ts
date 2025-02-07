@@ -3,13 +3,7 @@ import { ExpenseRepository } from "../../../../domain/interfaces/expense-reposit
 import { DateUtils } from "../../../../utils/date-utils";
 import { FilterDateError } from "../../../errors/expense/date-error";
 import { UseCase } from "../../../usecase";
-
-export enum Filter {
-  LAST_WEEK = "lastWeek",
-  LAST_MONTH = "lastMonth",
-  LAST_3_MONTHS = "last3Months",
-  CUSTOM = "custom",
-}
+import { Filter } from "@expense/types";
 
 interface ListExpenseInputDTO {
   userId: string;

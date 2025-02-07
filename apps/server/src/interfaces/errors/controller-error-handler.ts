@@ -30,10 +30,17 @@ export class ControllerErrorHandler {
       };
     }
 
+    if (error instanceof Error && error.message === "Invalid date format") {
+      return {
+        statusCode: HttpStatusCode.BAD_REQUEST,
+        body: { message: error.message },
+      };
+    }
+    
     console.error(error);
     return {
       statusCode: HttpStatusCode.INTERNAL_SERVER_ERROR,
-      body: { message: "Internal server error" },
+      body: { message: error || "Internal server error" },
     };
   }
 }

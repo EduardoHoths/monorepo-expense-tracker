@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { CreateExpenseUseCase } from "./create-expense";
-import { User } from "../../../../domain/entities/user/user";
-import { ExpenseCategory } from "../../../../domain/entities/expense/expense-category";
 import { UserRepository } from "../../../../domain/interfaces/user-repository";
 import { ExpenseRepository } from "../../../../domain/interfaces/expense-repository";
 import { Expense } from "../../../../domain/entities/expense/expense";
+import { ExpenseCategory } from "@expense/types";
+import { User } from "../../../../domain/entities/user/user";
 
 describe("CreateExpenseUseCase", () => {
   const mockUserRepository: UserRepository = {

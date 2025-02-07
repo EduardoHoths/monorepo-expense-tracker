@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, beforeAll, vi } from "vitest";
 import { Expense } from "../../../domain/entities/expense/expense";
-import { ExpenseCategory } from "../../../domain/entities/expense/expense-category";
+import { ExpenseCategory } from "@expense/types";
 import { User } from "../../../domain/entities/user/user";
 import { ExpenseRepositoryMemory } from "./expense-repository.memory";
 import { ExpenseRepository } from "../../../domain/interfaces/expense-repository";
