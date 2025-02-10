@@ -1,0 +1,8 @@
+{
+  "screens": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Enter you credentials to access your account"
+    }
+  }
+}

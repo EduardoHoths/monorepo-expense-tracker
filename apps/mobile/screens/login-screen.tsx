@@ -46,9 +46,9 @@ export function LoginScreen() {
         <Text className="text-white font-bold">Login</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity>
+      {/* <TouchableOpacity>
         <Text className="text-blue-500 text-center">Forgot password?</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <Text className="text-center mt-4 text-gray-600">
         Don't have an account?{" "}
