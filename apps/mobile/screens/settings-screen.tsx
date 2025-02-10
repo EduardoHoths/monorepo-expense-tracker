@@ -1,65 +1,53 @@
-import React from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { View, StyleSheet, Text } from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useTranslation } from "react-i18next";
 
-export function SettingsScreen() {
-  const settingsOptions = [
-    {
-      title: "Account",
-      icon: "person-outline",
-      onPress: () => {},
-    },
-    {
-      title: "Notifications",
-      icon: "notifications-outline",
-      onPress: () => {},
-    },
-    {
-      title: "Privacy",
-      icon: "lock-closed-outline",
-      onPress: () => {},
-    },
-    {
-      title: "Help & Support",
-      icon: "help-circle-outline",
-      onPress: () => {},
-    },
-    {
-      title: "About",
-      icon: "information-circle-outline",
-      onPress: () => {},
-    },
-  ];
+export const SettingsScreen = () => {
+  const { t, i18n } = useTranslation();
+  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
+
+  const changeLanguage = async (language: string) => {
+    try {
+      await AsyncStorage.setItem("userLanguage", language);
+      await i18n.changeLanguage(language);
+      setSelectedLanguage(language);
+    } catch (error) {
+      console.error("Error saving language:", error);
+    }
+  };
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
-      <ScrollView className="flex-1">
-        <View className="px-4 py-6">
-          <Text className="text-2xl font-bold text-gray-800 mb-6">
-            Settings
-          </Text>
-          {settingsOptions.map((option, index) => (
-            <TouchableOpacity
-              key={index}
-              className="flex-row items-center py-4 border-b border-gray-200"
-              onPress={option.onPress}
-            >
-              <Ionicons
-                name={option.icon as keyof typeof Ionicons.glyphMap}
-                size={24}
-                className="text-gray-600"
-              />
-              <Text className="text-gray-800 text-lg ml-4">{option.title}</Text>
-              <Ionicons
-                name="chevron-forward-outline"
-                size={20}
-                className="text-gray-400 ml-auto"
-              />
-            </TouchableOpacity>
-          ))}{" "}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <Text>{t("screens.settings.language")}</Text>
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={selectedLanguage}
+          onValueChange={(itemValue) => changeLanguage(itemValue)}
+          style={styles.picker}
+        >
+          <Picker.Item label="English" value="en" />
+          <Picker.Item label="Português" value="pt" />
+        </Picker>
+      </View>
+    </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    padding: 16,
+  },
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    marginTop: 16,
+  },
+  picker: {
+    height: 50,
+  },
+});

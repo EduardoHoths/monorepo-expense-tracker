@@ -27,6 +27,9 @@
         "text": "Já tem uma conta? ",
         "link": "Entrar"
       }
+    },
+    "settings": {
+      "language": "Idioma"
     }
   }
 }
