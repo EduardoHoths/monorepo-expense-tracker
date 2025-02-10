@@ -1,8 +1,32 @@
 {
   "screens": {
     "login": {
-      "title": "Welcome back",
-      "subtitle": "Enter you credentials to access your account"
+      "forgotPassword": "Forgot your password?",
+      "placeholders": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "signUp": {
+        "link": "Sign up",
+        "text": "Don't have an account? "
+      },
+      "submitButton": "Sign in",
+      "subtitle": "Enter your credentials to access your account",
+      "title": "Welcome back"
+    },
+    "signUp": {
+      "login": {
+        "link": "Login",
+        "text": "Already have an account? "
+      },
+      "placeholders": {
+        "email": "E-mail",
+        "name": "Name",
+        "password": "Password"
+      },
+      "submitButton": "Register",
+      "subtitle": "Create an account to start",
+      "title": "Create an account"
     }
   }
 }

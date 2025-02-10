@@ -1,0 +1,32 @@
+{
+  "screens": {
+    "login": {
+      "title": "Bem vindo de volta",
+      "subtitle": "Digite suas credenciais para acessar sua conta",
+      "placeholders": {
+        "email": "E-mail",
+        "password": "Senha"
+      },
+      "submitButton": "Entrar",
+      "forgotPassword": "Esqueceu sua senha?",
+      "signUp": {
+        "text": "Não tem uma conta? ",
+        "link": "Cadastre-se"
+      }
+    },
+    "signUp": {
+      "title": "Criar uma conta",
+      "subtitle": "Crie uma conta para começar",
+      "placeholders": {
+        "name": "Nome",
+        "email": "E-mail",
+        "password": "Senha"
+      },
+      "submitButton": "Cadastrar",
+      "login": {
+        "text": "Já tem uma conta? ",
+        "link": "Entrar"
+      }
+    }
+  }
+}

@@ -6,10 +6,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createUserSchema } from "@expense/zod-schemas";
 import Toast from "react-native-toast-message";
 import type { z } from "zod";
+import { useTranslation } from "react-i18next";
+import LoadingSpinner from "../components/loading-spinner";
 
 type FormData = z.infer<typeof createUserSchema>;
 
 export function RegisterScreen() {
+  const { t } = useTranslation();
+
   const navigation = useNavigation();
 
   const {
@@ -53,10 +57,10 @@ export function RegisterScreen() {
 
   return (
     <View className="flex-1 justify-center px-6 bg-white">
-      <Text className="text-3xl font-bold mb-2">Register</Text>
-      <Text className="text-gray-600 mb-6">
-        Create an account to get started
+      <Text className="text-3xl font-bold mb-2">
+        {t("screens.signUp.title")}
       </Text>
+      <Text className="text-gray-600 mb-6">{t("screens.signUp.subtitle")}</Text>
 
       <Controller
         control={control}
@@ -66,7 +70,7 @@ export function RegisterScreen() {
             className={`border  px-4 py-3 rounded-md mb-2 ${
               errors.name ? "border-red-500" : "border-gray-300"
             }`}
-            placeholder="Nome"
+            placeholder={t("screens.signUp.placeholders.name")}
             value={value}
             onChangeText={onChange}
             keyboardType="default"
@@ -84,7 +88,7 @@ export function RegisterScreen() {
             className={`border  px-4 py-3 rounded-md mb-2 ${
               errors.email ? "border-red-500" : "border-gray-300"
             }`}
-            placeholder="Email"
+            placeholder={t("screens.signUp.placeholders.email")}
             value={value}
             onChangeText={onChange}
             keyboardType="email-address"
@@ -103,7 +107,7 @@ export function RegisterScreen() {
             className={`border  px-4 py-3 rounded-md mb-2 ${
               errors.password ? "border-red-500" : "border-gray-300"
             }`}
-            placeholder="Senha"
+            placeholder={t("screens.signUp.placeholders.password")}
             value={value}
             secureTextEntry
             onChangeText={onChange}
@@ -117,22 +121,26 @@ export function RegisterScreen() {
       <TouchableOpacity
         onPress={handleSubmit(onSubmit)}
         className={`bg-black py-3 rounded-md flex items-center mb-2 ${
-          isSubmitting ? "opacity-50" : ""
+          isSubmitting ? "opacity-90" : ""
         }`}
         disabled={isSubmitting}
       >
         <Text className="text-white font-bold">
-          {isSubmitting ? "Registering..." : "Register"}
+          {isSubmitting ? (
+            <LoadingSpinner color="white" size={14} />
+          ) : (
+            t("screens.signUp.submitButton")
+          )}
         </Text>
       </TouchableOpacity>
 
       <Text className="text-center mt-4 text-gray-600">
-        Already have an account?{" "}
+        {t("screens.signUp.login.text")}
         <Text
           className="text-blue-500"
           onPress={() => navigation.navigate("Login" as never)}
         >
-          Login
+         {t("screens.signUp.login.link")}
         </Text>
       </Text>
     </View>

@@ -1,4 +1,5 @@
 import "../global.css";
+import "./i18n";
 import { AuthProvider } from "../context/auth-context";
 import { AppNavigator } from "../navigation/app-navigator";
 import Toast from "react-native-toast-message";

@@ -2,5 +2,7 @@
   "i18n-ally.localesPaths": [
     "packages/dictionaries/locales",
     "../../../../../Users/Edu/Desktop/monorepo-expense-tracker/packages/dictionaries/locales"
-  ]
+  ],
+  "i18n-ally.sourceLanguage": "pt",
+  "i18n-ally.extract.autoDetect": true
 }

@@ -8,6 +8,7 @@ import { SettingsScreen } from "../screens/settings-screen";
 import { ActivityIndicator, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { RegisterScreen } from "../screens/register-screen";
+import LoadingSpinner from "../components/loading-spinner";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -16,11 +17,7 @@ export function AppNavigator() {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="blue" />
-      </View>
-    );
+    return <LoadingSpinner />;
   }
 
   return (
