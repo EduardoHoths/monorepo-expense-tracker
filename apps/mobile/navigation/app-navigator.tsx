@@ -5,7 +5,6 @@ import { useAuth } from "../context/auth-context";
 import { LoginScreen } from "../screens/login-screen";
 import { HomeScreen } from "../screens/home-screen";
 import { SettingsScreen } from "../screens/settings-screen";
-import { ActivityIndicator, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { RegisterScreen } from "../screens/register-screen";
 import LoadingSpinner from "../components/loading-spinner";

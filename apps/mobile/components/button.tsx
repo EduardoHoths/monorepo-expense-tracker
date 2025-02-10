@@ -1,4 +1,4 @@
-import { Text, TouchableOpacityProps, TouchableOpacity } from "react-native";
+import { TouchableOpacityProps, TouchableOpacity } from "react-native";
 import { twMerge } from "tailwind-merge";
 
 export function Button({
