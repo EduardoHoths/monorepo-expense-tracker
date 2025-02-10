@@ -1,16 +1,41 @@
 import { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Pressable,
+} from "react-native";
 import { useAuth } from "../context/auth-context";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { authSchema } from "@expense/zod-schemas";
+import { Controller, useForm } from "react-hook-form";
+import ErrorMessage from "../components/form/error-message";
+
+type FormData = z.infer<typeof authSchema>;
 
 export function LoginScreen() {
   const { t } = useTranslation();
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuth();
   const navigation = useNavigation();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({
+    resolver: zodResolver(authSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
   async function handleLogin() {
     try {
@@ -27,24 +52,39 @@ export function LoginScreen() {
       </Text>
       <Text className="text-gray-600 mb-6">{t("screens.login.subtitle")}</Text>
 
-      <TextInput
-        className="border border-gray-300 px-4 py-3 rounded-md mb-4"
-        placeholder={t("screens.login.placeholders.email")}
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
+      <Controller
+        control={control}
+        name="email"
+        render={({ field: { onChange, value } }) => (
+          <TextInput
+            className="border w-full border-gray-300 px-4 py-3 rounded-md mb-2"
+            placeholder={t("screens.login.placeholders.email")}
+            value={value}
+            onChangeText={onChange}
+            keyboardType="email-address"
+          />
+        )}
       />
-      <TextInput
-        className="border border-gray-300 px-4 py-3 rounded-md mb-4"
-        placeholder={t("screens.login.placeholders.password")}
-        value={password}
-        secureTextEntry
-        onChangeText={setPassword}
+      {errors.email && <ErrorMessage message={errors.email.message} />}
+
+      <Controller
+        control={control}
+        name="password"
+        render={({ field: { onChange, value } }) => (
+          <TextInput
+            className="border w-full border-gray-300 px-4 py-3 rounded-md mb-2"
+            placeholder={t("screens.login.placeholders.password")}
+            value={value}
+            secureTextEntry
+            onChangeText={onChange}
+          />
+        )}
       />
+      {errors.password && <ErrorMessage message={errors.password.message} />}
 
       <TouchableOpacity
-        onPress={handleLogin}
-        className="bg-black py-3 rounded-md flex items-center mb-4"
+        className="bg-black py-3 rounded-md flex items-center mb-2"
+        onPress={handleSubmit(handleLogin)}
       >
         <Text className="text-white font-bold">
           {t("screens.login.submitButton")}

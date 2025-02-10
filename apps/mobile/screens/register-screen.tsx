@@ -5,7 +5,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createUserSchema } from "@expense/zod-schemas";
 import Toast from "react-native-toast-message";
-import type { z } from "zod";
+import { z } from "zod";
 import { useTranslation } from "react-i18next";
 import LoadingSpinner from "../components/loading-spinner";
 
@@ -140,7 +140,7 @@ export function RegisterScreen() {
           className="text-blue-500"
           onPress={() => navigation.navigate("Login" as never)}
         >
-         {t("screens.signUp.login.link")}
+          {t("screens.signUp.login.link")}
         </Text>
       </Text>
     </View>
