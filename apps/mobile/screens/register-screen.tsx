@@ -8,6 +8,9 @@ import Toast from "react-native-toast-message";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
 import LoadingSpinner from "../components/loading-spinner";
+import Input from "../components/input";
+import ErrorMessage from "../components/error-message";
+import { Button } from "../components/button";
 
 type FormData = z.infer<typeof createUserSchema>;
 
@@ -57,92 +60,88 @@ export function RegisterScreen() {
 
   return (
     <View className="flex-1 justify-center px-6 bg-white">
-      <Text className="text-3xl font-bold mb-2">
-        {t("screens.signUp.title")}
-      </Text>
-      <Text className="text-gray-600 mb-6">{t("screens.signUp.subtitle")}</Text>
+      <View>
+        <Text className="text-3xl font-bold mb-2">
+          {t("screens.signUp.title")}
+        </Text>
+        <Text className="text-gray-600 mb-6">
+          {t("screens.signUp.subtitle")}
+        </Text>
+      </View>
 
-      <Controller
-        control={control}
-        name="name"
-        render={({ field: { onChange, value } }) => (
-          <TextInput
-            className={`border  px-4 py-3 rounded-md mb-2 ${
-              errors.name ? "border-red-500" : "border-gray-300"
-            }`}
-            placeholder={t("screens.signUp.placeholders.name")}
-            value={value}
-            onChangeText={onChange}
-            keyboardType="default"
-          />
-        )}
-      />
-      {errors.name && (
-        <Text className="text-red-500 mb-2">{errors.name.message}</Text>
-      )}
-      <Controller
-        control={control}
-        name="email"
-        render={({ field: { onChange, value } }) => (
-          <TextInput
-            className={`border  px-4 py-3 rounded-md mb-2 ${
-              errors.email ? "border-red-500" : "border-gray-300"
-            }`}
-            placeholder={t("screens.signUp.placeholders.email")}
-            value={value}
-            onChangeText={onChange}
-            keyboardType="email-address"
-          />
-        )}
-      />
-      {errors.email && (
-        <Text className="text-red-500 mb-2">{errors.email.message}</Text>
-      )}
-
-      <Controller
-        control={control}
-        name="password"
-        render={({ field: { onChange, value } }) => (
-          <TextInput
-            className={`border  px-4 py-3 rounded-md mb-2 ${
-              errors.password ? "border-red-500" : "border-gray-300"
-            }`}
-            placeholder={t("screens.signUp.placeholders.password")}
-            value={value}
-            secureTextEntry
-            onChangeText={onChange}
-          />
-        )}
-      />
-      {errors.password && (
-        <Text className="text-red-500 mb-2">{errors.password.message}</Text>
-      )}
-
-      <TouchableOpacity
-        onPress={handleSubmit(onSubmit)}
-        className={`bg-black py-3 rounded-md flex items-center mb-2 ${
-          isSubmitting ? "opacity-90" : ""
-        }`}
-        disabled={isSubmitting}
-      >
-        <Text className="text-white font-bold">
-          {isSubmitting ? (
-            <LoadingSpinner color="white" size={14} />
-          ) : (
-            t("screens.signUp.submitButton")
+      <View>
+        <Controller
+          control={control}
+          name="name"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              className={errors.name ? "border-red-500" : "border-gray-300"}
+              placeholder={t("screens.signUp.placeholders.name")}
+              value={value}
+              onChangeText={onChange}
+              keyboardType="default"
+            />
           )}
-        </Text>
-      </TouchableOpacity>
+        />
+        {errors.name && <ErrorMessage message={errors.name.message} />}
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              className={errors.email ? "border-red-500" : "border-gray-300"}
+              placeholder={t("screens.signUp.placeholders.email")}
+              value={value}
+              onChangeText={onChange}
+              keyboardType="email-address"
+            />
+          )}
+        />
+        {errors.email && <ErrorMessage message={errors.email.message} />}
 
-      <Text className="text-center mt-4 text-gray-600">
-        {t("screens.signUp.login.text")}
-        <Text
-          className="text-blue-500"
-          onPress={() => navigation.navigate("Login" as never)}
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              className={errors.password ? "border-red-500" : "border-gray-300"}
+              placeholder={t("screens.signUp.placeholders.password")}
+              value={value}
+              secureTextEntry
+              onChangeText={onChange}
+            />
+          )}
+        />
+        {errors.password && <ErrorMessage message={errors.password.message} />}
+
+        <Button
+          onPress={handleSubmit(onSubmit)}
+          className={`bg-black py-3 rounded-md flex items-center mb-2 ${
+            isSubmitting ? "opacity-90" : ""
+          }`}
+          disabled={isSubmitting}
         >
-          {t("screens.signUp.login.link")}
+          <Text className="text-white font-bold">
+            {isSubmitting ? (
+              <LoadingSpinner size={14} color="white" />
+            ) : (
+              t("screens.signUp.submitButton")
+            )}
+          </Text>
+        </Button>
+      </View>
+
+      <View>
+        <Text className="text-center mt-4 text-gray-600">
+          {t("screens.signUp.login.text")}
+          <Text
+            className="text-blue-500"
+            onPress={() => navigation.navigate("Login" as never)}
+          >
+            {t("screens.signUp.login.link")}
+          </Text>
         </Text>
-      </Text>
+      </View>
     </View>
   );
 }

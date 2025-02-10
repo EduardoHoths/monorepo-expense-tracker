@@ -9,7 +9,9 @@ export function HomeScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Bem-vindo, {user?.email}!</Text>
       <Text>{user?.userId}</Text>
-      <Button title="Sair" onPress={logout} />
+      <Button onPress={logout}>
+        <Text className="text-white">Sair</Text>
+      </Button>
     </View>
   );
 }

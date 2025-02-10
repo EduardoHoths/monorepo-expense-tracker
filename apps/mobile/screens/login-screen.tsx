@@ -13,15 +13,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { authSchema } from "@expense/zod-schemas";
 import { Controller, useForm } from "react-hook-form";
-import ErrorMessage from "../components/form/error-message";
+import ErrorMessage from "../components/error-message";
+import Input from "../components/input";
+import { Button } from "../components/button";
+import LoadingSpinner from "../components/loading-spinner";
 
 type FormData = z.infer<typeof authSchema>;
 
 export function LoginScreen() {
   const { t } = useTranslation();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const { login } = useAuth();
   const navigation = useNavigation();
 
@@ -37,9 +38,9 @@ export function LoginScreen() {
     },
   });
 
-  async function handleLogin() {
+  async function onSubmit(data: FormData) {
     try {
-      await login(email, password);
+      await login(data.email, data.password);
     } catch (error) {
       console.error("Erro de login", error);
     }
@@ -56,8 +57,8 @@ export function LoginScreen() {
         control={control}
         name="email"
         render={({ field: { onChange, value } }) => (
-          <TextInput
-            className="border w-full border-gray-300 px-4 py-3 rounded-md mb-2"
+          <Input
+            className={errors.email ? "border-red-500" : "border-gray-300"}
             placeholder={t("screens.login.placeholders.email")}
             value={value}
             onChangeText={onChange}
@@ -71,8 +72,8 @@ export function LoginScreen() {
         control={control}
         name="password"
         render={({ field: { onChange, value } }) => (
-          <TextInput
-            className="border w-full border-gray-300 px-4 py-3 rounded-md mb-2"
+          <Input
+            className={errors.password ? "border-red-500" : "border-gray-300"}
             placeholder={t("screens.login.placeholders.password")}
             value={value}
             secureTextEntry
@@ -82,14 +83,21 @@ export function LoginScreen() {
       />
       {errors.password && <ErrorMessage message={errors.password.message} />}
 
-      <TouchableOpacity
-        className="bg-black py-3 rounded-md flex items-center mb-2"
-        onPress={handleSubmit(handleLogin)}
+      <Button
+        onPress={handleSubmit(onSubmit)}
+        className={`bg-black py-3 rounded-md flex items-center mb-2 ${
+          isSubmitting ? "opacity-90" : ""
+        }`}
+        disabled={isSubmitting}
       >
         <Text className="text-white font-bold">
-          {t("screens.login.submitButton")}
+          {isSubmitting ? (
+            <LoadingSpinner size={14} color="white" />
+          ) : (
+            t("screens.login.submitButton")
+          )}
         </Text>
-      </TouchableOpacity>
+      </Button>
 
       {/* <TouchableOpacity>
         <Text className="text-blue-500 text-center">
