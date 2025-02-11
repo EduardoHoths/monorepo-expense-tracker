@@ -44,21 +44,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   async function login(email: string, password: string) {
-    try {
-      const accessToken = await authLogin(email, password);
-      const { userId } = jwtDecode(accessToken) as Partial<User>;
+    const accessToken = await authLogin(email, password);
+    const { userId } = jwtDecode(accessToken) as Partial<User>;
 
-      const userData: User = {
-        accessToken: accessToken as string,
-        email,
-        userId: userId as string,
-      };
+    const userData: User = {
+      accessToken: accessToken as string,
+      email,
+      userId: userId as string,
+    };
 
-      await AsyncStorage.setItem("user", JSON.stringify(userData));
-      setUser(userData);
-    } catch (error) {
-      console.log(error);
-    }
+    await AsyncStorage.setItem("user", JSON.stringify(userData));
+    setUser(userData);
   }
 
   async function logout() {

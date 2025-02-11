@@ -5,12 +5,14 @@ import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { authSchema } from "@expense/zod-schemas";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import ErrorMessage from "@/components/error-message";
 import Input from "@/components/input";
 import { Button } from "@/components/button";
 import LoadingSpinner from "@/components/loading-spinner";
 import { Text } from "@/components/text";
+import { AxiosError } from "axios";
+import { useEffect, useState } from "react";
 
 type FormData = z.infer<typeof authSchema>;
 
@@ -18,7 +20,11 @@ export function LoginScreen() {
   const { t } = useTranslation();
 
   const { login } = useAuth();
+
   const navigation = useNavigation();
+  const [responseError, setResponseError] = useState<string | undefined>(
+    undefined
+  );
 
   const {
     control,
@@ -32,11 +38,23 @@ export function LoginScreen() {
     },
   });
 
+  const watchedFields = useWatch({ control, name: ["email", "password"] });
+
+  useEffect(() => {
+    if (responseError) {
+      setResponseError(undefined);
+    }
+  }, [watchedFields[0], watchedFields[1]]);
+
   async function onSubmit(data: FormData) {
     try {
       await login(data.email, data.password);
     } catch (error) {
       console.error("Erro de login", error);
+
+      if (error instanceof AxiosError) {
+        setResponseError(error.message);
+      }
     }
   }
 
@@ -76,6 +94,8 @@ export function LoginScreen() {
         )}
       />
       {errors.password && <ErrorMessage message={errors.password.message} />}
+
+      {responseError && <ErrorMessage message={responseError} />}
 
       <Button
         onPress={handleSubmit(onSubmit)}

@@ -12,6 +12,7 @@ import LoadingSpinner from "@/components/loading-spinner";
 import Input from "@/components/input";
 import ErrorMessage from "@/components/error-message";
 import { Button } from "@/components/button";
+import { AxiosError } from "axios";
 
 type FormData = z.infer<typeof createUserSchema>;
 
@@ -56,6 +57,22 @@ export function RegisterScreen() {
       }, 2000);
     } catch (error) {
       console.error("Error registering user:", error);
+
+      if (error instanceof AxiosError) {
+        Toast.show({
+          type: "error",
+          text1: "Erro ao registrar usuário",
+          text2: error.message,
+          visibilityTime: 2000,
+          autoHide: true,
+          text1Style: {
+            fontSize: 15,
+          },
+          text2Style: {
+            fontSize: 14,
+          },
+        });
+      }
     }
   };
 
@@ -76,7 +93,6 @@ export function RegisterScreen() {
           name="name"
           render={({ field: { onChange, value } }) => (
             <Input
-              className={errors.name ? "border-red-500" : "border-gray-300"}
               placeholder={t("screens.signUp.placeholders.name")}
               value={value}
               onChangeText={onChange}
@@ -91,7 +107,6 @@ export function RegisterScreen() {
           name="email"
           render={({ field: { onChange, value } }) => (
             <Input
-              className={errors.email ? "border-red-500" : "border-gray-300"}
               placeholder={t("screens.signUp.placeholders.email")}
               value={value}
               onChangeText={onChange}

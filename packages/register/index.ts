@@ -12,7 +12,7 @@ export async function register(name: string, email: string, password: string) {
     return response.data;
   } catch (error) {
     if (error instanceof AxiosError && error.response) {
-      throw error.response.data;
+      throw new AxiosError(error.response.data.message)
     }
 
     throw error;

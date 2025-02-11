@@ -11,7 +11,7 @@ export async function login(email: string, password: string) {
     return response.data.accessToken;
   } catch (error) {
     if (error instanceof AxiosError && error.response) {
-      throw error.response.data;
+      throw new AxiosError(error.response.data.message)
     }
     throw new Error("error" + error);
   }
