@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
+import { View } from "@/components/view";
+import { Text } from "@/components/text";
 
 export const SettingsScreen = () => {
   const { t, i18n } = useTranslation();

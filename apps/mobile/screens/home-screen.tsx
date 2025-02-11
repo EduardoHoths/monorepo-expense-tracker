@@ -1,6 +1,8 @@
-import { View, Text, StyleSheet } from "react-native";
-import { useAuth } from "../context/auth-context";
-import { Button } from "../components/button";
+import { StyleSheet } from "react-native";
+import { useAuth } from "@/context/auth-context";
+import { Button } from "@/components/button";
+import { View } from "@/components/view"
+import { Text } from "@/components/text";
 
 export function HomeScreen() {
   const { user, logout } = useAuth();

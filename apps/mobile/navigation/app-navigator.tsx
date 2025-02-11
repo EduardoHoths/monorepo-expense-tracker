@@ -1,13 +1,13 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { useAuth } from "../context/auth-context";
-import { LoginScreen } from "../screens/login-screen";
-import { HomeScreen } from "../screens/home-screen";
-import { SettingsScreen } from "../screens/settings-screen";
+import { useAuth } from "@/context/auth-context";
+import { LoginScreen } from "@/screens/login-screen";
+import { HomeScreen } from "@/screens/home-screen";
+import { SettingsScreen } from "@/screens/settings-screen";
 import { Ionicons } from "@expo/vector-icons";
-import { RegisterScreen } from "../screens/register-screen";
-import LoadingSpinner from "../components/loading-spinner";
+import { RegisterScreen } from "@/screens/register-screen";
+import LoadingSpinner from "@/components/loading-spinner";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();

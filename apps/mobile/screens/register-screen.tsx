@@ -1,5 +1,6 @@
 import { register } from "@expense/register";
-import { View, Text } from "react-native";
+import { View } from "@/components/view";
+import { Text } from "@/components/text";
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,10 +8,10 @@ import { createUserSchema } from "@expense/zod-schemas";
 import Toast from "react-native-toast-message";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
-import LoadingSpinner from "../components/loading-spinner";
-import Input from "../components/input";
-import ErrorMessage from "../components/error-message";
-import { Button } from "../components/button";
+import LoadingSpinner from "@/components/loading-spinner";
+import Input from "@/components/input";
+import ErrorMessage from "@/components/error-message";
+import { Button } from "@/components/button";
 
 type FormData = z.infer<typeof createUserSchema>;
 
@@ -61,7 +62,7 @@ export function RegisterScreen() {
   return (
     <View className="flex-1 justify-center px-6 bg-white">
       <View>
-        <Text className="text-3xl font-bold mb-2">
+        <Text className="text-3xl font-bold mb-2 dark:text-white">
           {t("screens.signUp.title")}
         </Text>
         <Text className="text-gray-600 mb-6">
@@ -80,6 +81,7 @@ export function RegisterScreen() {
               value={value}
               onChangeText={onChange}
               keyboardType="default"
+              error={!!errors.name}
             />
           )}
         />
@@ -94,6 +96,7 @@ export function RegisterScreen() {
               value={value}
               onChangeText={onChange}
               keyboardType="email-address"
+              error={!!errors.email}
             />
           )}
         />
@@ -104,11 +107,11 @@ export function RegisterScreen() {
           name="password"
           render={({ field: { onChange, value } }) => (
             <Input
-              className={errors.password ? "border-red-500" : "border-gray-300"}
               placeholder={t("screens.signUp.placeholders.password")}
               value={value}
               secureTextEntry
               onChangeText={onChange}
+              error={!!errors.password}
             />
           )}
         />
@@ -132,10 +135,10 @@ export function RegisterScreen() {
       </View>
 
       <View>
-        <Text className="text-center mt-4 text-gray-600">
+        <Text className="text-center mt-4 text-gray-600 dark:text-gray-400">
           {t("screens.signUp.login.text")}
           <Text
-            className="text-blue-500"
+            className="text-blue-500 dark:text-blue-400"
             onPress={() => navigation.navigate("Login" as never)}
           >
             {t("screens.signUp.login.link")}

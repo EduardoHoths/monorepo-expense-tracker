@@ -11,7 +11,7 @@ export default function ErrorMessage({
   ...props
 }: ErrorMessageProps) {
   return (
-    <Text className={twMerge("text-red-500 mb-2", className)} {...props}>
+    <Text className={twMerge("text-red-500 mb-2 dark:text-red-400", className)} {...props}>
       {message}
     </Text>
   );

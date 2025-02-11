@@ -20,11 +20,18 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       setTheme(colorScheme as Theme);
     });
 
+    toggleClassOnBody();
+
     return () => subscription.remove();
-  });
+  }, []);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    toggleClassOnBody();
+  };
+
+  const toggleClassOnBody = () => {
+    document.body.classList.toggle("dark", theme === "dark");
   };
 
   return (

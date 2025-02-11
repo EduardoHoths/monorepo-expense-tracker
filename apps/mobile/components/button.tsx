@@ -8,7 +8,7 @@ export function Button({
 }: TouchableOpacityProps) {
   return (
     <TouchableOpacity
-      className={twMerge("bg-blue-500 p-2 rounded-md", className)}
+      className={twMerge("bg-blue-500 p-2 rounded-md dark:bg-blue-500", className)}
       {...props}
     >
       {children}

@@ -1,22 +1,16 @@
-import { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Pressable,
-} from "react-native";
-import { useAuth } from "../context/auth-context";
+import { View } from "@/components/view";
+import { useAuth } from "@/context/auth-context";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { authSchema } from "@expense/zod-schemas";
 import { Controller, useForm } from "react-hook-form";
-import ErrorMessage from "../components/error-message";
-import Input from "../components/input";
-import { Button } from "../components/button";
-import LoadingSpinner from "../components/loading-spinner";
+import ErrorMessage from "@/components/error-message";
+import Input from "@/components/input";
+import { Button } from "@/components/button";
+import LoadingSpinner from "@/components/loading-spinner";
+import { Text } from "@/components/text";
 
 type FormData = z.infer<typeof authSchema>;
 
@@ -47,8 +41,8 @@ export function LoginScreen() {
   }
 
   return (
-    <View className="flex-1 justify-center px-6 bg-white">
-      <Text className="text-3xl font-bold mb-2">
+    <View className="flex-1 justify-center px-6">
+      <Text className="text-3xl font-bold mb-2 dark:text-gray-100">
         {t("screens.login.title")}
       </Text>
       <Text className="text-gray-600 mb-6">{t("screens.login.subtitle")}</Text>
@@ -58,11 +52,11 @@ export function LoginScreen() {
         name="email"
         render={({ field: { onChange, value } }) => (
           <Input
-            className={errors.email ? "border-red-500" : "border-gray-300"}
             placeholder={t("screens.login.placeholders.email")}
             value={value}
             onChangeText={onChange}
             keyboardType="email-address"
+            error={!!errors.email}
           />
         )}
       />
@@ -73,11 +67,11 @@ export function LoginScreen() {
         name="password"
         render={({ field: { onChange, value } }) => (
           <Input
-            className={errors.password ? "border-red-500" : "border-gray-300"}
             placeholder={t("screens.login.placeholders.password")}
             value={value}
             secureTextEntry
             onChangeText={onChange}
+            error={!!errors.password}
           />
         )}
       />
@@ -90,7 +84,7 @@ export function LoginScreen() {
         }`}
         disabled={isSubmitting}
       >
-        <Text className="text-white font-bold">
+        <Text className="font-bold text-white dark:text-white">
           {isSubmitting ? (
             <LoadingSpinner size={14} color="white" />
           ) : (
@@ -105,10 +99,10 @@ export function LoginScreen() {
         </Text>
       </TouchableOpacity> */}
 
-      <Text className="text-center mt-4 text-gray-600">
+      <Text className="text-center mt-4 text-gray-600 dark:text-gray-300">
         {t("screens.login.signUp.text")}
         <Text
-          className="text-blue-500"
+          className="text-blue-500 dark:text-blue-400"
           onPress={() => navigation.navigate("Register" as never)}
         >
           {t("screens.login.signUp.link")}
