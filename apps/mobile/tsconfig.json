@@ -4,6 +4,10 @@
     "../../tsconfig.base.json"
   ],
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   }
 }
