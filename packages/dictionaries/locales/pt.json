@@ -31,5 +31,8 @@
     "settings": {
       "language": "Idioma"
     }
+  },
+  "validations": {
+    "email_required": "E-mail é obrigatório"
   }
 }

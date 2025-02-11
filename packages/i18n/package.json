@@ -1,0 +1,17 @@
+{
+  "name": "@expense/i18n",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "i18next": "24.2.2",
+    "react-i18next": "15.4.0",
+    "@expense/dictionaries": "*"
+  }
+}

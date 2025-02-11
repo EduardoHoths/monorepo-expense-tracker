@@ -31,5 +31,8 @@
       "subtitle": "Create an account to start",
       "title": "Create an account"
     }
+  },
+  "validations": {
+    "email_required": "E-mail é obrigatório"
   }
 }
