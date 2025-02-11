@@ -3,34 +3,34 @@ import { ExpenseCategory, Filter } from "@expense/types";
 
 export const createExpenseSchema = z.object({
   description: z
-    .string({ message: "Description is required" })
+    .string({ message: "validations.expense.description.required" })
     .transform((description) => description.trim()),
 
   amount: z
-    .number({ message: "Amount is required" })
-    .positive({ message: "Amount must be a positive number" }),
+    .number({ message: "validations.expense.amount.required" })
+    .positive({ message: "validations.expense.amount.positive" }),
 
-  date: z.string({ message: "Date is required" }).transform((date) => {
-    const parsedDate = new Date(date);
+  date: z
+    .string({ message: "validations.expense.date.required" })
+    .transform((date) => {
+      const parsedDate = new Date(date);
 
-    if (isNaN(parsedDate.getTime())) {
-      throw new Error("Invalid date format");
-    }
+      if (isNaN(parsedDate.getTime())) {
+        throw new Error("validations.expense.date.format");
+      }
 
-    return date;
-  }),
+      return date;
+    }),
 
   category: z.nativeEnum(ExpenseCategory, {
-    message:
-      "Invalid category. Must be one of: Groceries, Leisure, Electronics, Utilities, Clothing, Health, Other",
+    message: "validations.expense.category.invalid",
   }),
 });
 
 export const listExpenseSchema = z.object({
   filter: z
     .nativeEnum(Filter, {
-      message:
-        "Invalid filter. Must be one of: lastWeek, lastMonth, last3Months, custom",
+      message: "validations.expense.filter.invalid",
     })
     .optional(),
 
@@ -40,7 +40,7 @@ export const listExpenseSchema = z.object({
       const parsedDate = new Date(date);
 
       if (isNaN(parsedDate.getTime())) {
-        throw new Error("Invalid date format");
+        throw new Error("validations.expense.date.format");
       }
 
       return date;
@@ -53,7 +53,7 @@ export const listExpenseSchema = z.object({
       const parsedDate = new Date(date);
 
       if (isNaN(parsedDate.getTime())) {
-        throw new Error("Invalid date format");
+        throw new Error("validations.expense.date.format");
       }
 
       return date;
@@ -63,13 +63,13 @@ export const listExpenseSchema = z.object({
 
 export const updateExpenseSchema = z.object({
   description: z
-    .string()
+    .string({ required_error: "validations.expense.description.required" })
     .optional()
     .transform((description) => description && description.trim()),
 
   amount: z
-    .number()
-    .positive({ message: "Amount must be a positive number" })
+    .number({ message: "validations.expense.amount.required" })
+    .positive({ message: "validations.expense.amount.positive" })
     .optional(),
 
   date: z
@@ -81,7 +81,7 @@ export const updateExpenseSchema = z.object({
       const parsedDate = new Date(date);
 
       if (isNaN(parsedDate.getTime())) {
-        throw new Error("Invalid date format");
+        throw new Error("validations.expense.date.format");
       }
 
       return date;
@@ -89,8 +89,7 @@ export const updateExpenseSchema = z.object({
 
   category: z
     .nativeEnum(ExpenseCategory, {
-      message:
-        "Invalid category. Must be one of: Groceries, Leisure, Electronics, Utilities, Clothing, Health, Other",
+      message: "validations.expense.category.invalid",
     })
     .optional(),
 });

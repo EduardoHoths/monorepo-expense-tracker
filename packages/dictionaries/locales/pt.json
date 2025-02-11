@@ -33,6 +33,52 @@
     }
   },
   "validations": {
-    "email_required": "E-mail é obrigatório"
+    "auth": {
+      "email": {
+        "required": "E-mail é obrigatório",
+        "min": "E-mail é obrigatório",
+        "email": "Formato de E-mail inválido"
+      },
+      "password": {
+        "required": "Senha é obrigatória",
+        "min": "Senha deve ter no mínimo 6 caracteres"
+      }
+    },
+    "register": {
+      "name": {
+        "required": "Nome é obrigatório",
+        "min": "O nome deve ter no mínimo 2 caracteres",
+        "max": "O nome deve ter no máximo 100 caracteres"
+      },
+      "email": {
+        "required": "E-mail é obrigatório",
+        "min": "E-mail é obrigatório",
+        "email": "Formato de E-mail inválido"
+      },
+      "password": {
+        "required": "Senha é obrigatória",
+        "min": "Senha deve ter no mínimo 6 caracteres",
+        "max": "O nome deve ter no máximo 100 caracteres"
+      }
+    },
+    "expense": {
+      "description": {
+        "required": "Descrição é obrigatória"
+      },
+      "amount": {
+        "required": "Valor é obrigatório",
+        "positive": "Valor deve ser um número positivo"
+      },
+      "date": {
+        "required": "Data é obrigatória",
+        "format": "Formato de data inválido"
+      },
+      "category": {
+        "invalid": "Categoria inválida. Deve ser uma das seguintes: Mercearia, Lazer, Eletrônicos, Utilitários, Vestuário, Saúde, Outros"
+      },
+      "filter": {
+        "invalid": "Filtro inválido. Deve ser uma das seguintes: lastWeek, lastMonth, lastYear, custom"
+      }
+    }
   }
 }

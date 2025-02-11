@@ -33,6 +33,51 @@
     }
   },
   "validations": {
-    "email_required": "E-mail é obrigatório"
-  }
-}
+    "auth": {
+      "email": {
+        "required": "Email is required",
+        "min": "Email is required",
+        "email": "Invalid email format"
+      },
+      "password": {
+        "required": "Password is required",
+        "min": "Password must have at least 6 characters"
+      }
+    },
+    "register": {
+      "name": {
+        "required": "Name is required",
+        "min": "Name must have at least 2 characters",
+        "max": "Name must have a maximum of 100 characters"
+      },
+      "email": {
+        "required": "Email is required",
+        "min": "Email is required",
+        "email": "Invalid email format"
+      },
+      "password": {
+        "required": "Password is required",
+        "min": "Password must have at least 6 characters",
+        "max": "Name must have a maximum of 100 characters"
+      }
+    },
+    "expense": {
+      "description": {
+        "required": "Description is required"
+      },
+      "amount": {
+        "required": "Amount is required",
+        "positive": "Amount must be a positive number"
+      },
+      "date": {
+        "required": "Date is required",
+        "format": "Invalid date format"
+      },
+      "category": {
+        "invalid": "Invalid category. Must be one of the following: Grocery, Leisure, Electronics, Utilities, Clothing, Health, Others"
+      },
+      "filter": {
+        "invalid": "Invalid filter. Must be one of the following: lastWeek, lastMonth, lastYear, custom"
+      }
+    }
+  }}
