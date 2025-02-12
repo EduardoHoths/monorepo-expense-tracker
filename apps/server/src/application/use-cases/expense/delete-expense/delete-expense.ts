@@ -8,6 +8,7 @@ import { UseCase } from "../../../usecase";
 type DeleteExpenseInputDTO = {
   id: string;
   userId: string;
+  lang: string;
 };
 
 type DeleteExpenseOutputDTO = void;
@@ -20,17 +21,17 @@ export class DeleteExpenseUseCase
     private userRepository: UserRepository
   ) {}
 
-  async execute({ id, userId }: DeleteExpenseInputDTO): Promise<void> {
+  async execute({ id, userId, lang }: DeleteExpenseInputDTO): Promise<void> {
     const user = await this.userRepository.findByUserId(userId);
 
     if (!user) {
-      throw new UserNotFoundError();
+      throw new UserNotFoundError(lang);
     }
 
     const expense = await this.expenseRepository.findExpenseById(id);
 
     if (!expense) {
-      throw new ExpenseNotFoundError();
+      throw new ExpenseNotFoundError(lang);
     }
 
     if (expense?.userId != userId) {

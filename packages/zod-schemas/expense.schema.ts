@@ -16,7 +16,8 @@ export const createExpenseSchema = z.object({
       const parsedDate = new Date(date);
 
       if (isNaN(parsedDate.getTime())) {
-        throw new Error("validations.expense.date.format");
+        // throw new Error("validations.expense.date.format");
+        throw new Error("InvalidDateFormat");
       }
 
       return date;

@@ -106,6 +106,8 @@ describe("Expense Routes", async () => {
         .send(invalidExpenseData)
         .set("Authorization", `Bearer ${authResponse.body.accessToken}`);
 
+        console.log(response.body) 
+
       expect(response.status).toBe(400);
       expect(response.body).toEqual(
         expect.objectContaining({

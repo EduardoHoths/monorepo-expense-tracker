@@ -7,6 +7,7 @@ import { authRoutes } from "./routes/auth/auth-routes";
 import { swaggerDocument } from "../config/swagger";
 import http from "http";
 import cors from "cors";
+import { i18nMiddleware } from "../../locales/i18n";
 
 export default class Server {
   public app: express.Application;
@@ -21,6 +22,7 @@ export default class Server {
   private configureMiddlewares() {
     this.app.use(bodyParser.json());
     this.app.use(cors());
+    this.app.use(i18nMiddleware);
   }
 
   private configureRoutes() {

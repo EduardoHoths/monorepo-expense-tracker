@@ -16,6 +16,7 @@ export const expressAdapter = (
         method: req.method,
         url: req.url,
         user: req.user,
+        t: req.t,
       };
 
       const result = await controller(httpRequest);

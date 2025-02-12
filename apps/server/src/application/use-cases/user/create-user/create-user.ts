@@ -7,6 +7,7 @@ interface CreateUserInputDTO {
   name: string;
   email: string;
   password: string;
+  lang: string;
 }
 
 type CreateUserOutputDTO = User;
@@ -20,11 +21,12 @@ export class CreateUserUseCase
     email,
     name,
     password,
+    lang,
   }: CreateUserInputDTO): Promise<CreateUserOutputDTO> {
     const existingUser = await this.userRepository.findByEmail(email);
 
     if (existingUser) {
-      throw new UserAlreadyExistsError();
+      throw new UserAlreadyExistsError(lang);
     }
 
     const user = await User.create({ email, password, name });

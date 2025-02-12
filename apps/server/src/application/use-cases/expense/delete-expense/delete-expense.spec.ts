@@ -58,6 +58,7 @@ describe("DeleteExpenseUseCase", () => {
     await deleteExpenseUseCase.execute({
       id: "1",
       userId: "1",
+      lang: "en",
     });
 
     expect(mockUserRepository.findByUserId).toHaveBeenCalledWith("1");
@@ -72,6 +73,7 @@ describe("DeleteExpenseUseCase", () => {
       deleteExpenseUseCase.execute({
         id: "1",
         userId: "1",
+        lang: "en",
       })
     ).rejects.toThrow("User not found");
   });
@@ -84,6 +86,7 @@ describe("DeleteExpenseUseCase", () => {
       deleteExpenseUseCase.execute({
         id: "1",
         userId: "1",
+        lang: "en",
       })
     ).rejects.toThrow("Expense not found");
   });
@@ -105,6 +108,7 @@ describe("DeleteExpenseUseCase", () => {
       deleteExpenseUseCase.execute({
         id: "1",
         userId: "2",
+        lang: "en",
       })
     ).rejects.toThrow("Expense does not belong to user");
   });

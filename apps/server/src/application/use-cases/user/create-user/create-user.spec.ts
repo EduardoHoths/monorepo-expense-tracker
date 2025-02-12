@@ -22,6 +22,7 @@ describe("CreateUserUseCase", () => {
       name: "test",
       email: "test@test.com",
       password: "password123",
+      lang: "en",
     };
 
     vi.mocked(userRepository.findByEmail).mockResolvedValue(null);
@@ -41,6 +42,7 @@ describe("CreateUserUseCase", () => {
       name: "test",
       email: "test@test.com",
       password: "password123",
+      lang: "en",
     };
 
     vi.mocked(userRepository.findByEmail).mockImplementation(async (email) => {
@@ -67,6 +69,7 @@ describe("CreateUserUseCase", () => {
       name: "test",
       email: "test@test.com",
       password: "password123",
+      lang: "en",
     };
 
     vi.mocked(userRepository.findByEmail).mockResolvedValue(null);

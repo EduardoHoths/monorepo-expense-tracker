@@ -33,6 +33,7 @@
     }
   },
   "validations": {
+    "invalidFields": "Campos inválidos",
     "auth": {
       "email": {
         "required": "E-mail é obrigatório",
@@ -80,5 +81,31 @@
         "invalid": "Filtro inválido. Deve ser uma das seguintes: lastWeek, lastMonth, lastYear, custom"
       }
     }
+  },"server":{
+    "auth": {
+      "missingToken": "Token não informado",
+      "invalidCredentials": "Credenciais inválidas"
+    },
+    "register": {
+      "success": "Usuário criado com sucesso",
+      "error": {
+        "alreadyExists": "Usuário já existe"
+      }
+    },
+    "expense": {
+      "create": {
+        "success": "Despesa criada com sucesso"
+      },
+      "update": {
+        "success":"Despesa atualizada com sucesso"
+      },
+      "delete": {
+        "success":"Despesa deletada com sucesso"
+      }, 
+      "error": {
+        "notFound": "Despesa não encontrada"
+      }
+    }
   }
+  
 }

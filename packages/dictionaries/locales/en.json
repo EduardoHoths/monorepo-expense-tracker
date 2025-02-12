@@ -1,38 +1,39 @@
 {
   "screens": {
     "login": {
-      "forgotPassword": "Forgot your password?",
+      "title": "Welcome back",
+      "subtitle": "Enter your credentials to access your account",
       "placeholders": {
         "email": "Email",
         "password": "Password"
       },
-      "signUp": {
-        "link": "Sign up",
-        "text": "Don't have an account? "
-      },
       "submitButton": "Sign in",
-      "subtitle": "Enter your credentials to access your account",
-      "title": "Welcome back"
+      "forgotPassword": "Forgot your password?",
+      "signUp": {
+        "text": "Don't have an account? ",
+        "link": "Sign up"
+      }
+    },
+    "signUp": {
+      "title": "Create an account",
+      "subtitle": "Create an account to get started",
+      "placeholders": {
+        "name": "Name",
+        "email": "Email",
+        "password": "Password"
+      },
+      "submitButton": "Sign up",
+      "login": {
+        "text": "Already have an account? ",
+        "link": "Sign in"
+      }
     },
     "settings": {
       "language": "Language"
-    },
-    "signUp": {
-      "login": {
-        "link": "Login",
-        "text": "Already have an account? "
-      },
-      "placeholders": {
-        "email": "E-mail",
-        "name": "Name",
-        "password": "Password"
-      },
-      "submitButton": "Register",
-      "subtitle": "Create an account to start",
-      "title": "Create an account"
     }
   },
   "validations": {
+    "invalidFields": "Invalid fields",
     "auth": {
       "email": {
         "required": "Email is required",
@@ -41,14 +42,14 @@
       },
       "password": {
         "required": "Password is required",
-        "min": "Password must have at least 6 characters"
+        "min": "Password must be at least 6 characters"
       }
     },
     "register": {
       "name": {
         "required": "Name is required",
-        "min": "Name must have at least 2 characters",
-        "max": "Name must have a maximum of 100 characters"
+        "min": "Name must be at least 2 characters",
+        "max": "Name must be less than 100 characters"
       },
       "email": {
         "required": "Email is required",
@@ -57,8 +58,8 @@
       },
       "password": {
         "required": "Password is required",
-        "min": "Password must have at least 6 characters",
-        "max": "Name must have a maximum of 100 characters"
+        "min": "Password must be at least 6 characters",
+        "max": "Name must be less than 100 characters"
       }
     },
     "expense": {
@@ -74,10 +75,36 @@
         "format": "Invalid date format"
       },
       "category": {
-        "invalid": "Invalid category. Must be one of the following: Grocery, Leisure, Electronics, Utilities, Clothing, Health, Others"
+        "invalid": "Invalid category. Must be one of: Groceries, Leisure, Electronics, Utilities, Clothing, Health, Other"
       },
       "filter": {
-        "invalid": "Invalid filter. Must be one of the following: lastWeek, lastMonth, lastYear, custom"
+        "invalid": "Invalid filter. Must be one of: lastWeek, lastMonth, last3Months, custom"
+      }
+    }
+  },
+  "server":{
+    "auth": {
+      "missingToken": "Token not provided",
+      "invalidCredentials": "Invalid credentials"
+    },
+    "register": {
+      "success": "User created successfully",
+      "error": {
+        "alreadyExists": "User already exists"
+      }
+    },
+    "expense": {
+      "create": {
+        "success": "Expense created successfully"
+      },
+      "update": {
+        "success":"Expense updated successfully"
+      },
+      "delete": {
+        "success":"Expense deleted successfully"
+      }, 
+      "error": {
+        "notFound": "Expense not found"
       }
     }
   }}

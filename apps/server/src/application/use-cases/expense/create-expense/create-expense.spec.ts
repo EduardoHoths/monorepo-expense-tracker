@@ -36,6 +36,7 @@ describe("CreateExpenseUseCase", () => {
     date: new Date("2020-01-01"),
     category: ExpenseCategory.GROCERIES,
     userId: "1",
+    lang: "en",
   };
 
   beforeEach(() => {

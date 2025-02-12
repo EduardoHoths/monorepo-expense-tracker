@@ -14,6 +14,7 @@ interface UpdateExpenseInputDTO {
   category?: ExpenseCategory;
   userId: string;
   expenseId: string;
+  lang: string
 }
 
 type UpdateExpenseOutputDTO = Expense;
@@ -33,17 +34,18 @@ export class UpdateExpenseUseCase
     category,
     userId,
     expenseId,
+    lang
   }: UpdateExpenseInputDTO): Promise<Expense> {
     const user = await this.userRepository.findByUserId(userId);
 
     if (!user) {
-      throw new UserNotFoundError();
+      throw new UserNotFoundError(lang);
     }
 
     const expense = await this.expenseRepository.findExpenseById(expenseId);
 
     if (!expense) {
-      throw new ExpenseNotFoundError();
+      throw new ExpenseNotFoundError(lang);
     }
 
     if (expense.userId != userId) {

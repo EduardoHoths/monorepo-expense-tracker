@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { UserRepository } from "../../../../domain/interfaces/user-repository";
 import { ExpenseRepository } from "../../../../domain/interfaces/expense-repository";
 import { User } from "../../../../domain/entities/user/user";
-import { ExpenseCategory } from "@expense/types"
+import { ExpenseCategory } from "@expense/types";
 import { Expense } from "../../../../domain/entities/expense/expense";
 import { UpdateExpenseUseCase } from "./update-expense";
 
@@ -64,6 +64,7 @@ describe("UpdateExpenseUseCase", () => {
       expenseId: "1",
       userId: "1",
       description: "Updated Expense",
+      lang: "en",
     });
 
     expect(expense).toEqual(
@@ -82,6 +83,7 @@ describe("UpdateExpenseUseCase", () => {
         expenseId: "1",
         userId: "1",
         description: "Updated Expense",
+        lang: "en",
       })
     ).rejects.toThrow("User not found");
   });
@@ -95,6 +97,7 @@ describe("UpdateExpenseUseCase", () => {
         expenseId: "1",
         userId: "1",
         description: "Updated Expense",
+        lang: "en",
       })
     ).rejects.toThrow("Expense not found");
   });
@@ -113,6 +116,7 @@ describe("UpdateExpenseUseCase", () => {
         expenseId: "1",
         userId: "1",
         description: "Updated Expense",
+        lang: "en",
       })
     ).rejects.toThrow("Expense does not belong to user");
   });
@@ -133,6 +137,7 @@ describe("UpdateExpenseUseCase", () => {
       expenseId: "1",
       userId: "1",
       amount: 200,
+      lang: "en",
     });
 
     expect(expense.amount).toBe(200);
@@ -154,6 +159,7 @@ describe("UpdateExpenseUseCase", () => {
       expenseId: "1",
       userId: "1",
       category: ExpenseCategory.ELECTRONICS,
+      lang: "en",
     });
 
     expect(expense.category).toBe(ExpenseCategory.ELECTRONICS);
@@ -176,6 +182,7 @@ describe("UpdateExpenseUseCase", () => {
       expenseId: "1",
       userId: "1",
       date: newDate,
+      lang: "en",
     });
 
     expect(expense.date).toEqual(newDate);

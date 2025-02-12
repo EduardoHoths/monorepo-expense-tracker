@@ -1,5 +1,5 @@
 import { Expense } from "../../../../domain/entities/expense/expense";
-import { ExpenseCategory } from "@expense/types"
+import { ExpenseCategory } from "@expense/types";
 import { ExpenseRepository } from "../../../../domain/interfaces/expense-repository";
 import { UserRepository } from "../../../../domain/interfaces/user-repository";
 import { UserNotFoundError } from "../../../errors/user/user-not-found";
@@ -11,6 +11,7 @@ interface CreateExpenseInputDTO {
   date: Date;
   category: ExpenseCategory;
   userId: string;
+  lang: string;
 }
 
 type CreateExpenseOutputDTO = Expense;
@@ -29,11 +30,12 @@ export class CreateExpenseUseCase
     date,
     category,
     userId,
+    lang,
   }: CreateExpenseInputDTO): Promise<Expense> {
     const user = await this.userRepository.findByUserId(userId);
 
     if (!user) {
-      throw new UserNotFoundError();
+      throw new UserNotFoundError(lang);
     }
 
     const expense = Expense.create({

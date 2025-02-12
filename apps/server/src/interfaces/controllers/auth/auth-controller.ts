@@ -18,11 +18,14 @@ export class AuthController {
 
   auth = async (req: HttpRequest): Promise<HttpResponse> => {
     try {
-      const { email, password } = this.authValidator.validate(req.body);
+      const lang = req.headers ? req.headers["accept-language"] : "en";
+
+      const { email, password } = this.authValidator.validate(req.body, req.t);
 
       const result = await this.authenticateUserUseCase.execute({
         email,
         password,
+        lang,
       });
 
       return {
@@ -32,7 +35,7 @@ export class AuthController {
         },
       };
     } catch (error: any) {
-      return ControllerErrorHandler.handle(error);
+      return ControllerErrorHandler.handle(error, req.t);
     }
   };
 }

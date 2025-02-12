@@ -16,11 +16,12 @@ describe("UserRepository", () => {
 
   describe("save", () => {
     it("should save a new user", async () => {
-      const user = await User.create({
+      const user = {
         name: "test",
         email: "test@test.com",
         password: "123456",
-      });
+        lang: "en",
+      };
 
       const savedUser = await createUserUseCase.execute(user);
 
@@ -31,17 +32,19 @@ describe("UserRepository", () => {
     });
 
     it("should throw error when trying to save user with duplicate email", async () => {
-      const user1 = await User.create({
+      const user1 = {
         name: "test",
         email: "test@test.com",
         password: "123456",
-      });
+        lang: "en",
+      };
 
-      const user2 = await User.create({
+      const user2 = {
         name: "test",
         email: "test@test.com",
         password: "123456",
-      });
+        lang: "en",
+      };
 
       await createUserUseCase.execute(user1);
 
@@ -57,11 +60,12 @@ describe("UserRepository", () => {
     });
 
     it("should find a user by email", async () => {
-      const user = await User.create({
+      const user = {
         name: "test",
         email: "test@test.com",
         password: "123456",
-      });
+        lang: "en",
+      };
 
       await createUserUseCase.execute(user);
 
@@ -78,6 +82,7 @@ describe("UserRepository", () => {
         name: "test",
         email: "test@test.com",
         password: "123456",
+        lang: "en",
       });
 
       const foundUser = await userRepository.findByUserId(user.id);

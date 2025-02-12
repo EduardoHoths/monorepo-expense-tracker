@@ -1,0 +1,1 @@
+Varificar os arquivos de erro e traduzir a resposta e os use-cases

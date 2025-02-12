@@ -7,6 +7,7 @@ import { InvalidCredentialsError } from "../../errors/auth/invalid-credentials-e
 interface AuthenticateUserInputDTO {
   email: string;
   password: string;
+  lang: string
 }
 
 interface AuthenticateUserOutputDTO {
@@ -24,11 +25,12 @@ export class AuthenticateUserUseCase
   async execute({
     email,
     password,
+    lang
   }: AuthenticateUserInputDTO): Promise<AuthenticateUserOutputDTO> {
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
-      throw new InvalidCredentialsError();
+      throw new InvalidCredentialsError(lang);
     }
 
     const isPasswordValid = await PasswordService.comparePassword(
@@ -37,7 +39,7 @@ export class AuthenticateUserUseCase
     );
 
     if (!isPasswordValid) {
-      throw new InvalidCredentialsError();
+      throw new InvalidCredentialsError(lang);
     }
 
     const token = this.TokenService.generate({

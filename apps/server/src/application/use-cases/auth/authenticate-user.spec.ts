@@ -32,6 +32,7 @@ describe("AuthenticateUserUseCase", () => {
     const input = {
       email: "test@test.com",
       password: "123456",
+      lang: "en",
     };
 
     const hashedPassword = await PasswordService.hashPassword(input.password);
@@ -58,6 +59,7 @@ describe("AuthenticateUserUseCase", () => {
     const input = {
       email: "test@test.com",
       password: "123456",
+      lang: "en",
     };
 
     vi.mocked(userRepository.findByEmail).mockResolvedValue(null);
@@ -71,6 +73,7 @@ describe("AuthenticateUserUseCase", () => {
     const input = {
       email: "test@test.com",
       password: "invalid-password",
+      lang: "en",
     };
 
     const hashedPassword = await PasswordService.hashPassword("123456");

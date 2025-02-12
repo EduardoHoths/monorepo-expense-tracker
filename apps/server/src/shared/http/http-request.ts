@@ -1,3 +1,5 @@
+import { TFunction } from "i18next";
+
 export interface HttpRequest {
   body?: any;
   headers?: Record<string, any>;
@@ -11,4 +13,5 @@ export interface HttpRequest {
     id: string;
     email: string;
   };
+  t: TFunction;
 }

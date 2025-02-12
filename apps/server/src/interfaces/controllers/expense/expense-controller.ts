@@ -9,6 +9,7 @@ import { ControllerErrorHandler } from "../../errors/controller-error-handler";
 import { ListExpensesUseCase } from "../../../application/use-cases/expense/list-expense/list-expense";
 import { UpdateExpenseUseCase } from "../../../application/use-cases/expense/update-expense/update-expense";
 import { DeleteExpenseUseCase } from "../../../application/use-cases/expense/delete-expense/delete-expense";
+import i18next from "i18next";
 
 interface CreateExpenseDTO {
   description: string;
@@ -45,8 +46,10 @@ export class ExpenseController {
     try {
       const userId = req.user!.id;
 
+      const lang = req.headers ? req.headers["accept-language"] : "en";
+
       const { description, amount, date, category } =
-        this.createExpenseValidator.validate(req.body);
+        this.createExpenseValidator.validate(req.body, req.t);
 
       const expense = await this.createExpenseUseCase.execute({
         description,
@@ -54,6 +57,7 @@ export class ExpenseController {
         date: new Date(date),
         category,
         userId,
+        lang,
       });
 
       const responseBody = ExpensePresenter.toJSON(expense);
@@ -61,12 +65,12 @@ export class ExpenseController {
       return {
         statusCode: HttpStatusCode.CREATED,
         body: {
-          message: "Expense created successfully",
+          message: req.t("server.expense.create.success"),
           expense: responseBody,
         },
       };
     } catch (error: any) {
-      return ControllerErrorHandler.handle(error);
+      return ControllerErrorHandler.handle(error, req.t);
     }
   };
 
@@ -75,7 +79,8 @@ export class ExpenseController {
       const userId = req.user!.id;
 
       const { filter, startDate, endDate } = this.listExpenseValidator.validate(
-        req.query
+        req.query,
+        req.t
       ) as {
         filter?: Filter;
         startDate?: string;
@@ -98,7 +103,7 @@ export class ExpenseController {
         body: responseBody,
       };
     } catch (error) {
-      return ControllerErrorHandler.handle(error);
+      return ControllerErrorHandler.handle(error, req.t);
     }
   };
 
@@ -106,10 +111,12 @@ export class ExpenseController {
     try {
       const userId = req.user!.id;
 
+      const lang = req.headers ? req.headers["Accept-Language"] : "en";
+
       const { id } = req.params as { id: string };
 
       const { description, amount, date, category } =
-        this.updateExpenseValidator.validate(req.body);
+        this.updateExpenseValidator.validate(req.body, req.t);
 
       const isNewDate = date && new Date(date);
 
@@ -120,6 +127,7 @@ export class ExpenseController {
         category,
         userId,
         expenseId: id,
+        lang,
       });
 
       const responseBody = ExpensePresenter.toJSON(expense);
@@ -127,12 +135,12 @@ export class ExpenseController {
       return {
         statusCode: HttpStatusCode.OK,
         body: {
-          message: "Expense updated successfully",
+          message: req.t("server.expense.update.success"),
           expense: responseBody,
         },
       };
     } catch (error) {
-      return ControllerErrorHandler.handle(error);
+      return ControllerErrorHandler.handle(error, req.t);
     }
   };
 
@@ -140,21 +148,24 @@ export class ExpenseController {
     try {
       const userId = req.user!.id;
 
+      const lang = req.headers ? req.headers["Accept-Language"] : "en";
+
       const { id } = req.params as { id: string };
 
       await this.deleteExpenseUseCase.execute({
         userId,
         id,
+        lang,
       });
 
       return {
         statusCode: HttpStatusCode.OK,
         body: {
-          message: "Expense deleted successfully",
+          message: req.t("server.expense.delete.success"),
         },
       };
     } catch (error) {
-      return ControllerErrorHandler.handle(error);
+      return ControllerErrorHandler.handle(error, req.t);
     }
   };
 }
