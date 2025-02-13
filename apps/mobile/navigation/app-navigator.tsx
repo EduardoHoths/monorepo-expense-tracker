@@ -8,15 +8,30 @@ import { SettingsScreen } from "@/screens/settings-screen";
 import { Ionicons } from "@expo/vector-icons";
 import { RegisterScreen } from "@/screens/register-screen";
 import LoadingSpinner from "@/components/loading-spinner";
+import { useTheme } from "@/context/theme-context";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
+const tabs = [
+  {
+    name: "Home",
+    component: HomeScreen,
+    icon: "home",
+  },
+  {
+    name: "Settings",
+    component: SettingsScreen,
+    icon: "settings",
+  },
+];
+
 export function AppNavigator() {
   const { user, loading } = useAuth();
+  const { theme } = useTheme();
 
   if (loading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner color={theme === "dark" ? "#fff" : undefined} />;
   }
 
   return (
@@ -26,29 +41,31 @@ export function AppNavigator() {
           initialRouteName="Home"
           screenOptions={{
             headerShown: false,
+            tabBarShowLabel: false,
+            tabBarStyle: {
+              backgroundColor: theme === "dark" ? "#112227" : "#fff",
+              borderTopColor: "transparent",
+            },
           }}
         >
-          <Tab.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              tabBarLabel: "Home",
-              tabBarIcon: ({ color, size }) => (
-                <Ionicons name="home" size={size} color={color} />
-              ),
-            }}
-          />
-
-          <Tab.Screen
-            name="Settings"
-            component={SettingsScreen}
-            options={{
-              tabBarLabel: "Settings",
-              tabBarIcon: ({ color, size }) => (
-                <Ionicons name="settings" size={size} color={color} />
-              ),
-            }}
-          />
+          {tabs.map((tab) => (
+            <Tab.Screen
+              name={tab.name}
+              component={tab.component}
+              options={{
+                tabBarItemStyle: {
+                  marginTop: 5,
+                },
+                tabBarIcon: ({ size, focused }) => (
+                  <Ionicons
+                    name={tab.icon as keyof typeof Ionicons.glyphMap}
+                    size={size}
+                    color={focused ? "#00A3FF" : theme === "dark" ? "#D6D6D6" : "#5A5A5A"}
+                  />
+                ),
+              }}
+            />
+          ))}
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>
