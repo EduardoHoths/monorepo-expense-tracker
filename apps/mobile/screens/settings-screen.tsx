@@ -5,10 +5,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
 import { View } from "@/components/view";
 import { Text } from "@/components/text";
+import { Button } from "../components/button";
+import { useAuth } from "../context/auth-context";
+import { useColorScheme } from "nativewind";
 
 export const SettingsScreen = () => {
   const { t, i18n } = useTranslation();
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
+  const { logout } = useAuth();
+  const { colorScheme, setColorScheme } = useColorScheme();
 
   const changeLanguage = async (language: string) => {
     try {
@@ -21,35 +26,33 @@ export const SettingsScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View className="pt-10">
       <Text>{t("screens.settings.language")}</Text>
-      <View style={styles.pickerContainer}>
+      <View>
         <Picker
           selectedValue={selectedLanguage}
           onValueChange={(itemValue) => changeLanguage(itemValue)}
-          style={styles.picker}
         >
           <Picker.Item label="English" value="en" />
           <Picker.Item label="Português" value="pt" />
         </Picker>
       </View>
+
+      <View>
+        <Picker
+          onValueChange={(itemValue: "light" | "dark") =>
+            setColorScheme(itemValue)
+          }
+          selectedValue={colorScheme}
+        >
+          <Picker.Item label="light" value="light" />
+          <Picker.Item label="dark" value="dark" />
+        </Picker>
+      </View>
+
+      <Button onPress={logout}>
+        <Text>Logout</Text>
+      </Button>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: 16,
-  },
-  pickerContainer: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    marginTop: 16,
-  },
-  picker: {
-    height: 50,
-  },
-});

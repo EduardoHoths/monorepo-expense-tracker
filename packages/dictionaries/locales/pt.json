@@ -81,7 +81,8 @@
         "invalid": "Filtro inválido. Deve ser uma das seguintes: lastWeek, lastMonth, lastYear, custom"
       }
     }
-  },"server":{
+  },
+  "server": {
     "auth": {
       "missingToken": "Token não informado",
       "invalidCredentials": "Credenciais inválidas"
@@ -97,15 +98,14 @@
         "success": "Despesa criada com sucesso"
       },
       "update": {
-        "success":"Despesa atualizada com sucesso"
+        "success": "Despesa atualizada com sucesso"
       },
       "delete": {
-        "success":"Despesa deletada com sucesso"
-      }, 
+        "success": "Despesa deletada com sucesso"
+      },
       "error": {
         "notFound": "Despesa não encontrada"
       }
     }
   }
-  
 }

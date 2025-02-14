@@ -14,6 +14,7 @@ import { Text } from "@/components/text";
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 
+
 type FormData = z.infer<typeof authSchema>;
 
 export function LoginScreen() {
@@ -99,7 +100,7 @@ export function LoginScreen() {
 
       <Button
         onPress={handleSubmit(onSubmit)}
-        className={`bg-black py-3 rounded-md flex items-center mb-2 ${
+        className={`bg-black py-3 rounded-md flex items-center justify-center h-14 mb-2 ${
           isSubmitting ? "opacity-90" : ""
         }`}
         disabled={isSubmitting}

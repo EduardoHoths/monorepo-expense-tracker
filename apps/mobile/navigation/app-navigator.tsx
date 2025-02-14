@@ -22,8 +22,13 @@ const tabs = [
   {
     name: "Settings",
     component: SettingsScreen,
-    icon: "settings",
+    icon: "settings-outline",
   },
+  // {
+  //   name: "Expenses",
+  //   component: null,
+  //   icon: "bar-chart-outline",
+  // },
 ];
 
 export function AppNavigator() {
@@ -31,7 +36,9 @@ export function AppNavigator() {
   const { colorScheme } = useColorScheme();
 
   if (loading) {
-    return <LoadingSpinner color={colorScheme === "dark" ? "#fff" : undefined} />;
+    return (
+      <LoadingSpinner color={colorScheme === "dark" ? "#fff" : undefined} />
+    );
   }
 
   return (
