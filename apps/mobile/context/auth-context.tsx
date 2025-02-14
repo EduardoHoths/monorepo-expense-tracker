@@ -7,6 +7,7 @@ type User = {
   userId: string;
   accessToken: string;
   email: string;
+  name: string;
 };
 
 type AuthContextType = {
@@ -45,12 +46,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function login(email: string, password: string) {
     const accessToken = await authLogin(email, password);
-    const { userId } = jwtDecode(accessToken) as Partial<User>;
+    const { userId, name } = jwtDecode(accessToken) as User;
 
     const userData: User = {
-      accessToken: accessToken as string,
+      accessToken,
       email,
-      userId: userId as string,
+      userId,
+      name,
     };
 
     await AsyncStorage.setItem("user", JSON.stringify(userData));

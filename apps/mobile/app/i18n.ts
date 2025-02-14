@@ -1,10 +1,11 @@
 import { i18nConfig } from "@expense/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Localization from "react-native-localize";
+import { getLocales } from "expo-localization";
 
 const getStoredLanguage = async () => {
   const storedLang = await AsyncStorage.getItem("language");
-  return storedLang || Localization.getLocales()[0].languageTag || "en";
+  const deviceLanguage = getLocales()[0].languageCode;
+  return storedLang || deviceLanguage || "en";
 };
 
 const languageDetector = {
